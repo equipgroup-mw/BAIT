@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: #f6ebe2;
+  color: #003135;
+}
+
+body {
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .display {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background: #32b498;
+  color: #ffffff;
+}
+
+/* visible keyboard focus, always */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #ff8a59;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f6ebe2;
+}
+::-webkit-scrollbar-thumb {
+  background: #72c2b9;
+  border-radius: 8px;
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1.4px, transparent 1.4px);
+  background-size: 26px 26px;
+}
+.dot-grid-dark {
+  background-image: radial-gradient(rgba(0, 49, 53, 0.12) 1.4px, transparent 1.4px);
+  background-size: 26px 26px;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
