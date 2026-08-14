@@ -7,8 +7,7 @@ import ArrowIcon from './ArrowIcon';
 
 export default function Services() {
   return (
-    <section id="services" className="relative bg-turquoise py-28 md:py-36">
-      <div className="dot-grid pointer-events-none absolute inset-0" />
+    <section id="services" className="relative bg-pattern-dark py-28 md:py-36">
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">
         <div className="grid gap-16 md:grid-cols-[0.9fr_1.1fr] md:gap-8">
           <div className="md:sticky md:top-32 md:h-fit">
@@ -37,7 +36,7 @@ export default function Services() {
               >
                 <ArrowIcon
                   className="absolute -right-4 -top-4 h-16 w-16 opacity-0 transition duration-500 group-hover:-right-1 group-hover:-top-1 group-hover:opacity-100"
-                  fill="#32B498"
+                  variant="light-turq"
                 />
                 <span className="font-display text-xs font-bold uppercase tracking-widest text-aqua">
                   0{i + 1}

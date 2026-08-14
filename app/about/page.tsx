@@ -20,8 +20,7 @@ export default function AboutPage() {
   return (
     <>
       {/* header */}
-      <section className="relative overflow-hidden bg-turquoise pb-20 pt-40 text-cream md:pb-28 md:pt-48">
-        <div className="dot-grid pointer-events-none absolute inset-0" />
+      <section className="relative overflow-hidden bg-pattern-dark pb-20 pt-40 text-cream md:pb-28 md:pt-48">
         <div className="relative mx-auto max-w-7xl px-6 md:px-10">
           <Sticker color="coral" rotate={-3} className="w-fit">About Us</Sticker>
           <h1 className="mt-6 max-w-3xl font-display text-6xl font-bold uppercase leading-[0.92] sm:text-7xl">
@@ -36,19 +35,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* group photo */}
-      <section className="relative -mt-10 md:-mt-16">
-        <div className="mx-auto max-w-6xl px-6 md:px-10">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl shadow-2xl shadow-black/30 md:aspect-[21/9]">
-            <Image
-              src="/team/group.jpg"
-              alt="Sophie, Max, and Haywood — the Clickbait team"
-              fill
-              className="object-cover"
-              priority
-              sizes="90vw"
-            />
-          </div>
+      {/* group photo — full-bleed, blending into green at the base */}
+      <section className="relative h-[62vh] w-full overflow-hidden bg-green sm:h-[75vh] md:h-screen">
+        <div
+          className="absolute inset-0"
+          style={{
+            maskImage: 'linear-gradient(to bottom, black 72%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 72%, transparent 100%)',
+          }}
+        >
+          <Image
+            src="/team/group.jpg"
+            alt="Sophie, Max, and Haywood — the Clickbait team"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
         </div>
       </section>
 
@@ -69,7 +72,7 @@ export default function AboutPage() {
                   i % 2 === 1 ? 'md:[&>*:first-child]:order-2' : ''
                 }`}
               >
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
+                <div className="relative aspect-[4/3] w-full max-h-[65vh] overflow-hidden rounded-2xl sm:aspect-[5/4] md:aspect-[4/5] md:max-h-[560px]">
                   <Image
                     src={member.image}
                     alt={`${member.name}, ${member.role}`}
@@ -77,7 +80,7 @@ export default function AboutPage() {
                     className="object-cover"
                     sizes="(max-width: 768px) 90vw, 45vw"
                   />
-                  <ArrowIcon className="absolute right-5 top-5 h-9 w-9" fill="#FF8A59" />
+                  <ArrowIcon className="absolute right-5 top-5 h-9 w-9" variant="default" />
                 </div>
 
                 <div>
@@ -96,7 +99,7 @@ export default function AboutPage() {
       </section>
 
       {/* values recap */}
-      <section className="bg-turquoise py-24 text-cream">
+      <section className="bg-pattern-dark py-24 text-cream">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <Sticker color="green" rotate={-2} className="w-fit">How we work</Sticker>
           <div className="mt-10 grid gap-8 sm:grid-cols-2">

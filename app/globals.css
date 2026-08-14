@@ -50,13 +50,12 @@ button:focus-visible {
   border-radius: 8px;
 }
 
-.dot-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1.4px, transparent 1.4px);
-  background-size: 26px 26px;
-}
-.dot-grid-dark {
-  background-image: radial-gradient(rgba(0, 49, 53, 0.12) 1.4px, transparent 1.4px);
-  background-size: 26px 26px;
+/* Real brand background: #003135 tiled with the arrow-icon pattern. */
+.bg-pattern-dark {
+  background-color: #003135;
+  background-image: url('/brand/Arrow-pattern.png');
+  background-repeat: repeat;
+  background-size: 420px auto;
 }
 
 .text-outline {

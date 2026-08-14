@@ -18,7 +18,7 @@ export default function Marquee() {
             <span className="font-display text-3xl font-bold uppercase tracking-tight text-turquoise md:text-5xl">
               {w}
             </span>
-            <ArrowIcon className="h-6 w-6 md:h-8 md:w-8" fill="#FF8A59" />
+            <ArrowIcon className="h-6 w-6 md:h-8 md:w-8" variant="default" />
           </span>
         ))}
       </div>

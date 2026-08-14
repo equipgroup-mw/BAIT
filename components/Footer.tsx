@@ -4,8 +4,7 @@ import ArrowIcon from './ArrowIcon';
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative overflow-hidden bg-turquoise pt-24 text-cream">
-      <div className="dot-grid pointer-events-none absolute inset-0" />
+    <footer id="contact" className="relative overflow-hidden bg-pattern-dark pt-24 text-cream">
       <div className="relative mx-auto max-w-7xl px-6 pb-14 md:px-10">
         <div className="grid gap-14 md:grid-cols-2 md:items-end">
           <div>
@@ -48,7 +47,7 @@ export default function Footer() {
         <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-cream/15 pt-8 md:flex-row">
           <div className="w-28"><Logo variant="light" className="w-full" /></div>
           <p className="flex items-center gap-2 text-xs text-cream/60">
-            <ArrowIcon className="h-3 w-3" fill="#72C2B9" />
+            <ArrowIcon className="h-3 w-3" variant="light-turq" />
             &copy; {new Date().getFullYear()} Clickbait. All rights reserved.
           </p>
         </div>

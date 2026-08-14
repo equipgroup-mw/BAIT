@@ -11,11 +11,13 @@ const links = [
   { href: '/#contact', label: 'Contact' },
 ];
 
+const TOP_THRESHOLD = 16;
+
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
+  const [atTop, setAtTop] = useState(true);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setAtTop(window.scrollY < TOP_THRESHOLD);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -24,12 +26,14 @@ export default function Nav() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-turquoise/80 backdrop-blur-lg shadow-lg shadow-black/10' : 'bg-transparent'
+        atTop
+          ? 'translate-y-0 opacity-100 bg-transparent'
+          : '-translate-y-full opacity-0 pointer-events-none'
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
         <Link href="/" className="w-28 md:w-32" aria-label="Clickbait home">
-          <Logo variant="light" className="w-full" />
+          <Logo className="w-full" />
         </Link>
         <ul className="hidden items-center gap-9 md:flex">
           {links.map((l) => (

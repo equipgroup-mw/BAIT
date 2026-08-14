@@ -11,15 +11,14 @@ export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
 
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.28]);
-  const imgY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const imgY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const imgRotate = useTransform(scrollYProgress, [0, 1], [0, 6]);
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -90]);
 
   return (
-    <section ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden bg-turquoise pt-24">
-      <div className="dot-grid pointer-events-none absolute inset-0" />
-
+    <section ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden bg-pattern-dark pt-24">
       {/* floating decorative arrows */}
       <ArrowIcon
         className="absolute left-[8%] top-[22%] h-8 w-8 animate-float opacity-70 md:h-12 md:w-12"
@@ -67,14 +66,19 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <motion.div style={{ scale: imgScale, y: imgY }} className="relative mx-auto aspect-[4/5] w-full max-w-md">
-          <div
-            className="relative h-full w-full overflow-hidden"
-            style={{ clipPath: 'polygon(18% 0%, 100% 8%, 62% 44%, 82% 100%, 44% 90%, 34% 50%, 0% 66%)' }}
-          >
-            <Image src="/brand/Hero-arrow.png" alt="Clickbait creative studio at work" fill className="object-cover" priority sizes="(max-width: 768px) 90vw, 40vw" />
-            <div className="absolute inset-0 bg-green/25 mix-blend-hard-light" />
-          </div>
+        {/* Hero-arrow.png shown on its own — no code-drawn shape or overlay around it */}
+        <motion.div
+          style={{ scale: imgScale, y: imgY, rotate: imgRotate }}
+          className="relative mx-auto aspect-square w-full max-w-lg"
+        >
+          <Image
+            src="/brand/Hero-arrow.png"
+            alt="Clickbait"
+            fill
+            className="object-contain drop-shadow-2xl"
+            priority
+            sizes="(max-width: 768px) 90vw, 40vw"
+          />
         </motion.div>
       </motion.div>
 

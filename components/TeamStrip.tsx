@@ -5,7 +5,7 @@ import Sticker from './Sticker';
 
 export default function TeamStrip() {
   return (
-    <section className="bg-turquoise py-28 md:py-36">
+    <section className="bg-pattern-dark py-28 md:py-36">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="grid items-center gap-14 md:grid-cols-[1fr_1.1fr]">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">

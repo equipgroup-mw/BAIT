@@ -13,8 +13,7 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-turquoise pb-16 pt-40 text-cream md:pb-20 md:pt-48">
-        <div className="dot-grid pointer-events-none absolute inset-0" />
+      <section className="relative overflow-hidden bg-pattern-dark pb-16 pt-40 text-cream md:pb-20 md:pt-48">
         <div className="relative mx-auto max-w-7xl px-6 md:px-10">
           <Sticker color="coral" rotate={-3} className="w-fit">Our Work</Sticker>
           <h1 className="mt-6 max-w-3xl font-display text-6xl font-bold uppercase leading-[0.92] sm:text-7xl">
@@ -50,7 +49,7 @@ export default function WorkPage() {
                     className="object-cover"
                     sizes="(max-width: 768px) 90vw, 45vw"
                   />
-                  <ArrowIcon className="absolute left-5 top-5 h-9 w-9" fill="#FF8A59" />
+                  <ArrowIcon className="absolute left-5 top-5 h-9 w-9" variant="default" />
                 </div>
 
                 <div>
@@ -68,7 +67,7 @@ export default function WorkPage() {
         ))}
       </section>
 
-      <section className="bg-turquoise py-24 text-center text-cream">
+      <section className="bg-pattern-dark py-24 text-center text-cream">
         <div className="mx-auto max-w-2xl px-6">
           <h2 className="font-display text-4xl font-bold uppercase leading-tight sm:text-5xl">
             Want to be story number five?

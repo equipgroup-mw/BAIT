@@ -66,7 +66,7 @@ export default function ProjectCard({ title, category, year, image, slug, index 
             </span>
             <h3 className="mt-2 flex items-center gap-3 font-display text-3xl font-bold uppercase text-cream md:text-4xl">
               {title}
-              <ArrowIcon className="h-6 w-6 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100" fill="#FF8A59" />
+              <ArrowIcon className="h-6 w-6 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100" variant="default" />
             </h3>
           </div>
         </motion.div>

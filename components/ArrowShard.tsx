@@ -13,10 +13,8 @@ type Props = {
 };
 
 /**
- * The signature visual device of the site: a photograph cropped into the
- * brand's cursor-arrow silhouette, echoing the shard imagery used
- * throughout the Clickbait brand guidelines (Vision / Mission / Photography).
- * On scroll it drifts and rotates slightly, like Apple's product reveals.
+ * Photo/graphic block with a gentle scroll-driven drift, used alongside the
+ * real brand shard/arrow artwork rather than a code-drawn silhouette.
  */
 export default function ArrowShard({ src, alt, tint = 'green', className = '', parallax = true }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -25,8 +23,8 @@ export default function ArrowShard({ src, alt, tint = 'green', className = '', p
     offset: ['start end', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], parallax ? [80, -80] : [0, 0]);
-  const rotate = useTransform(scrollYProgress, [0, 1], parallax ? [-6, 2] : [-4, -4]);
+  const y = useTransform(scrollYProgress, [0, 1], parallax ? [60, -60] : [0, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], parallax ? [-3, 1] : [0, 0]);
 
   const overlay =
     tint === 'green'
@@ -40,12 +38,8 @@ export default function ArrowShard({ src, alt, tint = 'green', className = '', p
   return (
     <div ref={ref} className={`relative ${className}`}>
       <motion.div
-        style={{
-          y,
-          rotate,
-          clipPath: 'polygon(15% 0%, 100% 12%, 58% 46%, 78% 100%, 40% 92%, 32% 52%, 0% 68%)',
-        }}
-        className="relative aspect-[4/5] w-full overflow-hidden"
+        style={{ y, rotate }}
+        className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl"
       >
         <Image src={imageSrc} alt={alt} fill sizes="(max-width: 768px) 90vw, 40vw" className="object-cover" priority={tint === 'green' && !src} />
         {tint !== 'none' && <div className={`absolute inset-0 ${overlay}`} />}
