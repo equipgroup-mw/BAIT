@@ -15,11 +15,11 @@ export default function VisionMission() {
               We tell stories that connect, perform, and push boundaries.
             </p>
           </div>
-          <ArrowShard src="/team/sophie.jpg" alt="Strategy session in progress" tint="green" className="md:justify-self-end md:w-4/5" parallax={false} />
+          <ArrowShard src="/brand/Arrow-pattern.png" alt="Strategy session in progress" tint="green" className="md:justify-self-end md:w-4/5" parallax={false} />
         </div>
 
         <div className="mt-24 grid gap-20 md:grid-cols-2 md:gap-8">
-          <ArrowShard src="/team/max.jpg" alt="Creative direction in progress" tint="green" className="order-2 md:order-1 md:w-4/5" parallax={false} />
+          <ArrowShard src="/brand/Arrow-icon-lightTurq.png" alt="Creative direction in progress" tint="green" className="order-2 md:order-1 md:w-4/5" parallax={false} />
           <div className="order-1 flex flex-col justify-center md:order-2">
             <Sticker color="sand" rotate={3} className="w-fit">Our Mission</Sticker>
             <h2 className="mt-6 font-display text-4xl font-bold uppercase leading-[1.02] sm:text-5xl">

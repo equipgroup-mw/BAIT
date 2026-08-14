@@ -23,13 +23,13 @@ export default function Hero() {
       {/* floating decorative arrows */}
       <ArrowIcon
         className="absolute left-[8%] top-[22%] h-8 w-8 animate-float opacity-70 md:h-12 md:w-12"
-        fill="#32B498"
         style={{ ['--r' as any]: '-18deg' }}
+        variant="dark-turq"
       />
       <ArrowIcon
         className="absolute left-[18%] top-[62%] h-6 w-6 animate-float opacity-60 md:h-9 md:w-9"
-        fill="#72C2B9"
         style={{ ['--r' as any]: '10deg', animationDelay: '1.2s' }}
+        variant="light-turq"
       />
 
       <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-center md:px-10">
@@ -72,7 +72,7 @@ export default function Hero() {
             className="relative h-full w-full overflow-hidden"
             style={{ clipPath: 'polygon(18% 0%, 100% 8%, 62% 44%, 82% 100%, 44% 90%, 34% 50%, 0% 66%)' }}
           >
-            <Image src="/team/hero.jpg" alt="Clickbait creative studio at work" fill className="object-cover" priority sizes="(max-width: 768px) 90vw, 40vw" />
+            <Image src="/brand/Hero-arrow.png" alt="Clickbait creative studio at work" fill className="object-cover" priority sizes="(max-width: 768px) 90vw, 40vw" />
             <div className="absolute inset-0 bg-green/25 mix-blend-hard-light" />
           </div>
         </motion.div>

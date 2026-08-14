@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
 type Props = {
-  src: string;
+  src?: string;
   alt: string;
   tint?: 'green' | 'none' | 'mono';
   className?: string;
@@ -35,6 +35,8 @@ export default function ArrowShard({ src, alt, tint = 'green', className = '', p
       ? 'bg-turquoise mix-blend-luminosity'
       : '';
 
+  const imageSrc = src || '/brand/Arrow-shard.png';
+
   return (
     <div ref={ref} className={`relative ${className}`}>
       <motion.div
@@ -45,7 +47,7 @@ export default function ArrowShard({ src, alt, tint = 'green', className = '', p
         }}
         className="relative aspect-[4/5] w-full overflow-hidden"
       >
-        <Image src={src} alt={alt} fill sizes="(max-width: 768px) 90vw, 40vw" className="object-cover" />
+        <Image src={imageSrc} alt={alt} fill sizes="(max-width: 768px) 90vw, 40vw" className="object-cover" priority={tint === 'green' && !src} />
         {tint !== 'none' && <div className={`absolute inset-0 ${overlay}`} />}
       </motion.div>
     </div>

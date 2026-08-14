@@ -9,7 +9,7 @@ export default function TeamStrip() {
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="grid items-center gap-14 md:grid-cols-[1fr_1.1fr]">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            <Image src="/team/group.jpg" alt="The Clickbait team" fill className="object-cover" sizes="(max-width: 768px) 90vw, 45vw" />
+            <Image src="/brand/Arrow-pattern.png" alt="The Clickbait team" fill className="object-cover" sizes="(max-width: 768px) 90vw, 45vw" />
           </div>
           <div>
             <Sticker color="green" rotate={-3} className="w-fit">Who&rsquo;s behind it</Sticker>
