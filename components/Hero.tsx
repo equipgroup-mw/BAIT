@@ -12,7 +12,7 @@ export default function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
 
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const imgY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const imgY = useTransform(scrollYProgress, [0, 1], [0, -120]); // Changed to negative to move up on scroll
   const imgRotate = useTransform(scrollYProgress, [0, 1], [0, 6]);
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -90]);
@@ -69,7 +69,7 @@ export default function Hero() {
         {/* Hero-arrow.png shown on its own — no code-drawn shape or overlay around it */}
         <motion.div
           style={{ scale: imgScale, y: imgY, rotate: imgRotate }}
-          className="relative mx-auto aspect-square w-full max-w-lg"
+          className="relative mx-auto -mt-24 aspect-square w-full max-w-4xl md:-mt-48" // Adjusted margins to pull image up
         >
           <Image
             src="/brand/Hero-arrow.png"
