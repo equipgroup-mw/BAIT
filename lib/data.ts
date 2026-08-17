@@ -54,10 +54,10 @@ export const projects = [
     summary: 'A full rebrand of Elim Group\u2019s social presence, pairing bold photography with a content system built for daily posting.',
   },
   {
-    title: 'Oya Farms',
+    title: 'Proto Poultry',
     category: 'Content & Storytelling',
     year: '2025',
-    slug: 'oya-farms',
+    slug: 'proto-poultry',
     image: '/work/project-2.jpg',
     summary: 'From-the-field content that turned a working farm into a following — photo, video, and a voice people actually trust.',
   },

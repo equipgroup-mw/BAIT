@@ -2,18 +2,18 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import ArrowIcon from './ArrowIcon';
 import Sticker from './Sticker';
+
+// Three.js/WebGL can only run in the browser, never during Next.js's server render.
+const HeroArrowScene = dynamic(() => import('./HeroArrowScene'), { ssr: false });
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
 
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const imgY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const imgRotate = useTransform(scrollYProgress, [0, 1], [0, 6]);
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -90]);
 
@@ -66,19 +66,12 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Hero-arrow.png shown on its own — no code-drawn shape or overlay around it */}
+        {/* 3D-arrow.glb — same position as the old Hero-arrow.png, just a bit higher */}
         <motion.div
-          style={{ scale: imgScale, y: imgY, rotate: imgRotate }}
-          className="relative mx-auto aspect-square w-full max-w-lg"
+          style={{ opacity: fade }}
+          className="relative -mt-6 aspect-square w-full h-full md:h-screen max-w-none md:-mt-60"
         >
-          <Image
-            src="/brand/Hero-arrow.png"
-            alt="Clickbait"
-            fill
-            className="object-contain drop-shadow-2xl"
-            priority
-            sizes="(max-width: 768px) 90vw, 40vw"
-          />
+          <HeroArrowScene scrollProgress={scrollYProgress} />
         </motion.div>
       </motion.div>
 
