@@ -20,7 +20,8 @@ export default function AboutPage() {
   return (
     <>
       {/* header */}
-      <section className="relative overflow-hidden bg-pattern-dark pb-20 pt-40 text-cream md:pb-28 md:pt-48">
+      {/* Reverted to original pt/pb alignment, kept min-h-dynamic-screen */}
+      <section className="relative overflow-hidden bg-pattern-animated pb-20 pt-40 text-cream md:pb-28 md:pt-48 min-h-dynamic-screen">
         <div className="relative mx-auto max-w-7xl px-6 md:px-10">
           <Sticker color="coral" rotate={-3} className="w-fit">About Us</Sticker>
           <h1 className="mt-6 max-w-3xl font-display text-6xl font-bold uppercase leading-[0.92] sm:text-7xl">
@@ -36,7 +37,8 @@ export default function AboutPage() {
       </section>
 
       {/* group photo — full-bleed, blending into green at the base */}
-      <section className="relative h-[62vh] w-full overflow-hidden bg-green sm:h-[75vh] md:h-screen">
+      {/* Kept min-h-dynamic-screen so the photo fills the screen perfectly */}
+      <section className="relative min-h-dynamic-screen w-full overflow-hidden bg-green">
         <div
           className="absolute inset-0"
           style={{
@@ -44,11 +46,21 @@ export default function AboutPage() {
             WebkitMaskImage: 'linear-gradient(to bottom, black 72%, transparent 100%)',
           }}
         >
+          {/* Mobile Image */}
+          <Image
+            src="/team/group-mobile.jpg"
+            alt="Sophie, Max, and Haywood — the Clickbait team"
+            fill
+            className="object-cover md:hidden"
+            priority
+            sizes="100vw"
+          />
+          {/* Desktop Image */}
           <Image
             src="/team/group.jpg"
             alt="Sophie, Max, and Haywood — the Clickbait team"
             fill
-            className="object-cover"
+            className="hidden object-cover md:block"
             priority
             sizes="100vw"
           />
@@ -73,12 +85,21 @@ export default function AboutPage() {
                 }`}
               >
                 <div className="relative aspect-[4/3] w-full max-h-[65vh] overflow-hidden rounded-2xl sm:aspect-[5/4] md:aspect-[4/5] md:max-h-[560px]">
+                  {/* Mobile gets its own crop (portrait-friendly framing) instead of
+                      the desktop photo squeezed/cropped by object-cover. */}
+                  <Image
+                    src={member.mobileImage}
+                    alt={`${member.name}, ${member.role}`}
+                    fill
+                    className="object-cover md:hidden"
+                    sizes="(max-width: 767px) 90vw, 0px" 
+                  />
                   <Image
                     src={member.image}
                     alt={`${member.name}, ${member.role}`}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 90vw, 45vw"
+                    className="hidden object-cover md:block"
+                    sizes="(min-width: 768px) 45vw, 0px"
                   />
                   <ArrowIcon className="absolute right-5 top-5 h-9 w-9" variant="default" />
                 </div>
@@ -99,7 +120,8 @@ export default function AboutPage() {
       </section>
 
       {/* values recap */}
-      <section className="bg-pattern-dark py-24 text-cream">
+      {/* Reverted to original py-24 alignment, kept min-h-dynamic-screen */}
+      <section className="bg-pattern-animated py-24 text-cream min-h-dynamic-screen">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <Sticker color="green" rotate={-2} className="w-fit">How we work</Sticker>
           <div className="mt-10 grid gap-8 sm:grid-cols-2">

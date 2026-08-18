@@ -3,6 +3,7 @@ import { Manrope, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import SmoothScroll from '@/components/SmoothScroll';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -34,9 +35,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
       <body className="bg-cream font-body text-turquoise antialiased">
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

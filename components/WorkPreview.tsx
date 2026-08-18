@@ -15,6 +15,9 @@ export default function WorkPreview() {
               <br />
               already told.
             </h2>
+            <p className="mt-4 max-w-md text-lg text-turquoise/70">
+              50+ projects and counting. Here&rsquo;s a highlight of our favorites.
+            </p>
           </div>
           <Link
             href="/work"

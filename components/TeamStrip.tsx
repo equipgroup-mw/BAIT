@@ -8,8 +8,14 @@ export default function TeamStrip() {
     <section className="bg-pattern-dark py-28 md:py-36">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="grid items-center gap-14 md:grid-cols-[1fr_1.1fr]">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            <Image src="/brand/Arrow-pattern.png" alt="The Clickbait team" fill className="object-cover" sizes="(max-width: 768px) 90vw, 45vw" />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-turquoise-dark ring-1 ring-cream/10">
+            <Image
+              src="/brand/Hero-arrow.png"
+              alt="The Clickbait arrow mark"
+              fill
+              className="object-contain p-2 scale-125 -translate-x-4 translate-y-1"
+              sizes="(max-width: 768px) 90vw, 45vw"
+            />
           </div>
           <div>
             <Sticker color="green" rotate={-3} className="w-fit">Who&rsquo;s behind it</Sticker>

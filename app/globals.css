@@ -2,24 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* 
+    Full-screen section height.
+    Fallbacks to 100vh for older browsers, but uses 100dvh on modern 
+    browsers to perfectly handle mobile address bars sliding up/down.
+  */
+  .min-h-dynamic-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
 :root {
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: 'Metropolitano', sans-serif;
   --font-body: 'Manrope', sans-serif;
 }
 
-* {
-  scroll-behavior: smooth;
-}
+/* Native smooth-scroll intentionally omitted — Lenis (SmoothScroll.tsx)
+   drives scroll physics instead, and the two fight each other if both are
+   active at once (double-easing, jittery anchor-link jumps). */
 
 html,
 body {
   background: #f6ebe2;
   color: #003135;
+  /* Firefox scrollbar styling: thumb color then track color */
+  scrollbar-width: thin;
+  scrollbar-color: #72c2b9 #f6ebe2;
 }
 
 body {
   font-family: var(--font-body);
   overflow-x: hidden;
+  /* Custom cursor = the real brand mark (public/brand/icon.cur), crooked
+     tilt intentional — do not straighten it. The click point (the pair of
+     numbers right after each url() below — the "hotspot") is what
+     determines click accuracy, not the visual size of the image, so this
+     is set precisely on the drawn tip: (1 1) for the current placeholder
+     art fitted into the 52x20 box. Swap in the final 52x20 icon.cur /
+     icon-cursor.png and update just those two numbers to match the new
+     art's tip pixel (x = px in from the left, y = px down from the top) —
+     nothing else needs to change. icon-cursor.png is a same-size PNG
+     fallback for the rare browser that won't load the .cur. */
+  cursor: url('/brand/cursor.cur') 1 1, url('/brand/cursor.png') 1 1, auto;
 }
 
 h1, h2, h3, h4, .display {
@@ -58,9 +84,57 @@ button:focus-visible {
   background-size: 420px auto;
 }
 
+/* 
+  Animated Background Pattern
+  ----------------------------------
+  Slides the pattern to the left smoothly using pure CSS.
+  30s = the speed (lower is faster, higher is slower).
+*/
+.bg-pattern-animated {
+  background-color: #003135;
+  background-image: url('/brand/Arrow-pattern.png');
+  background-repeat: repeat;
+  background-size: 420px auto;
+  animation: slide-left 30s linear infinite;
+}
+
+@keyframes slide-left {
+  from { background-position: 0 0; }
+  to { background-position: -420px 0; } /* Must match the background-size width */
+}
+
+/* Outlined "love" in the hero headline. -webkit-text-stroke only renders in
+   Chrome/Safari/Edge — Firefox and any browser without support was left with
+   transparent, invisible text. Fall back to a solid cream fill whenever the
+   stroke isn't supported, so the word is always visible somewhere. */
 .text-outline {
-  -webkit-text-stroke: 1.5px currentColor;
+  -webkit-text-stroke: 1.5px #f6ebe2;
   color: transparent;
+}
+
+@supports not (-webkit-text-stroke: 1px #f6ebe2) {
+  .text-outline {
+    color: #f6ebe2;
+  }
+}
+
+/* 
+  Custom Cursor Glow State
+  ----------------------------------
+  Instead of reverting to the system pointer, we swap to a secondary cursor 
+  image (cursor-glow.png) that has a white outline/glow baked into the art.
+  Make sure to add a 'cursor-glow.png' (or .cur) to your public/brand folder.
+  Keep the same 52x20 box and hotspot (1 1) so the cursor doesn't visually jump.
+*/
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+label[for],
+select,
+summary {
+  cursor: url('/brand/cursor-glow.png') 1 1, auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -71,5 +145,10 @@ button:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  /* Respect reduced motion preferences for the background animation */
+  .bg-pattern-animated {
+    animation: none;
   }
 }
