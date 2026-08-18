@@ -4,6 +4,7 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
+import OrientationGate from '@/components/OrientationGate';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -36,9 +37,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
       <body className="bg-cream font-body text-turquoise antialiased">
         <SmoothScroll>
-          <Nav />
-          <main>{children}</main>
-          <Footer />
+          {/* Wrap everything in OrientationGate so tablets in portrait mode get the rotate prompt */}
+          <OrientationGate>
+            <Nav />
+            <main>{children}</main>
+            <Footer />
+          </OrientationGate>
         </SmoothScroll>
       </body>
     </html>

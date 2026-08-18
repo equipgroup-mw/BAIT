@@ -31,14 +31,12 @@ export default function Hero() {
       />
 
       {/* Added relative to the grid container so the absolute arrow stays bound to this area */}
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-center md:px-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-4 px-6 md:grid-cols-2 md:items-center md:gap-10 md:px-10">
         
-        {/* Only the text/copy fades and drifts on scroll — the 3D model (below) is
-            deliberately left out of this fade so it stays fully visible. 
-            Added md:self-start so the text doesn't try to center-align with the empty grid space. */}
+        {/* Only the text/copy fades and drifts on scroll */}
         <motion.div style={{ opacity: fade, y: textY }} className="md:self-start">
           <Sticker color="green" rotate={-3}>Marketing &amp; Media Studio</Sticker>
-          <h1 className="mt-6 font-display text-6xl font-bold uppercase leading-[0.92] text-cream sm:text-7xl lg:text-8xl">
+          <h1 className="mt-6 font-display text-5xl font-bold uppercase leading-[0.92] text-cream sm:text-7xl lg:text-8xl">
             We turn
             <br />
             brand stories
@@ -52,26 +50,16 @@ export default function Hero() {
           </h1>
         </motion.div>
 
-        {/* 3D-arrow.glb — kept fully visible (no scroll-fade) so people can actually
-            sit with it and interact instead of watching it disappear on scroll.
-
-            Mobile/portrait (base classes): sits in normal document flow, right below
-            the text, sized relative to viewport width and capped so it can never
-            overflow a narrow screen.
-            Tablet-landscape/desktop (md: classes): switches to the absolute, centered
-            overlay behind the text — unchanged from before.
-
-            MANUAL MOVEMENT INSTRUCTIONS:
-            - Mobile position/size: adjust `mt-6` (gap below text) or the
-              `h-[60vw] max-h-[420px] w-[60vw] max-w-[420px]` pair (bigger vw% / cap = bigger model).
-            - Desktop position: md:top-[50%] → e.g. md:top-[20%] to move UP, md:top-[70%] to move DOWN.
-              md:left-[50%] → shift left/right. md:w-[80vh] / md:h-screen → resize. */}
-        <div className="relative mx-auto mt-6 aspect-square h-[60vw] w-[60vw] max-h-[420px] max-w-[420px] md:absolute md:top-[45%] md:left-[50%] md:z-[-1] md:mx-0 md:mt-0 md:h-screen md:w-[80vh] md:max-w-none md:max-h-none md:-translate-y-1/2">
+        {/* 
+          3D-arrow.glb 
+          Mobile: Sized using `svh` (Small Viewport Height) so it scales up on longer phones,
+          but shrinks on shorter phones so it ALWAYS fits on screen with the text.
+          Desktop: Unchanged, absolute centered overlay.
+        */}
+        <div className="relative mx-auto mt-4 aspect-square h-[35svh] w-[35svh] max-h-[420px] max-w-[420px] md:absolute md:top-[45%] md:left-[50%] md:z-[-1] md:mx-0 md:mt-0 md:h-screen md:w-[80vh] md:max-w-none md:max-h-none md:-translate-y-1/2">
           <HeroArrowScene scrollProgress={scrollYProgress} />
         </div>
       </div>
-
-
     </section>
   );
 }

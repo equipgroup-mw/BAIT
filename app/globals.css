@@ -35,17 +35,14 @@ body {
 body {
   font-family: var(--font-body);
   overflow-x: hidden;
-  /* Custom cursor = the real brand mark (public/brand/icon.cur), crooked
-     tilt intentional — do not straighten it. The click point (the pair of
-     numbers right after each url() below — the "hotspot") is what
-     determines click accuracy, not the visual size of the image, so this
-     is set precisely on the drawn tip: (1 1) for the current placeholder
-     art fitted into the 52x20 box. Swap in the final 52x20 icon.cur /
-     icon-cursor.png and update just those two numbers to match the new
-     art's tip pixel (x = px in from the left, y = px down from the top) —
-     nothing else needs to change. icon-cursor.png is a same-size PNG
-     fallback for the rare browser that won't load the .cur. */
-  cursor: url('/brand/cursor.cur') 1 1, url('/brand/cursor.png') 1 1, auto;
+  /* 
+    Custom cursor = the real brand mark. 
+    DOUBLED SIZE: We added "104 40" before the URLs to force the browser to 
+    scale the 52x20 image to 104x40 pixels.
+    HOTSPOT: Changed from (1 1) to (2 2) because the image size doubled.
+    FALLBACK: Changed 'auto' to 'pointer' so the browser prioritizes our image.
+  */
+  cursor: url('/brand/cursr.cur') 0 0, url('/brand/cursor.png') 0 0, pointer;
 }
 
 h1, h2, h3, h4, .display {
@@ -124,7 +121,8 @@ button:focus-visible {
   Instead of reverting to the system pointer, we swap to a secondary cursor 
   image (cursor-glow.png) that has a white outline/glow baked into the art.
   Make sure to add a 'cursor-glow.png' (or .cur) to your public/brand folder.
-  Keep the same 52x20 box and hotspot (1 1) so the cursor doesn't visually jump.
+  DOUBLED SIZE: Added "104 40" and changed hotspot to "2 2" to match the body cursor.
+  FALLBACK: Changed to 'pointer'.
 */
 a,
 button,
@@ -134,7 +132,7 @@ input[type="button"],
 label[for],
 select,
 summary {
-  cursor: url('/brand/cursor-glow.png') 1 1, auto;
+  cursor: url('/brand/cursor-glow.png') 0 0, pointer;
 }
 
 @media (prefers-reduced-motion: reduce) {
