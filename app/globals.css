@@ -2,28 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Manrope', sans-serif;
+@layer utilities {
+  /* 
+    Full-screen section height.
+    Fallbacks to 100vh for older browsers, but uses 100dvh on modern 
+    browsers to perfectly handle mobile address bars sliding up/down.
+  */
+  .min-h-dynamic-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
 }
 
-* {
-  scroll-behavior: smooth;
+:root {
+  --font-display: 'Metropolitano', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+
+  /* Clickbait palette for tile grid */
+  --turquoise: #003135;
+  --turquoise-dark: #00191c;
+  --turquoise-light: #004d52;
+  --aqua: #72C2B9;
+  --green: #32B498;
+  --coral: #FF8A59;
+  --cream: #F6EBE2;
+  --sand: #D9B591;
+
+  /* Accent gradient pairs for placeholders (no thumbnail) */
+  --accent-turquoise-a: #00191c;
+  --accent-turquoise-b: #003135;
+  --accent-coral-a: #3d1f0d;
+  --accent-coral-b: #8b3e1f;
+  --accent-green-a: #0a362b;
+  --accent-green-b: #1e6b5a;
+  --accent-sand-a: #3d301f;
+  --accent-sand-b: #8b7352;
+
+  --gap: 6px;
+  --ease: cubic-bezier(.22,.85,.32,1);
 }
+
+/* Native smooth-scroll intentionally omitted — Lenis (SmoothScroll.tsx)
+   drives scroll physics instead, and the two fight each other if both are
+   active at once (double-easing, jittery anchor-link jumps). */
 
 html,
 body {
   background: #f6ebe2;
   color: #003135;
+  /* Firefox scrollbar styling: thumb color then track color */
+  scrollbar-width: thin;
+  scrollbar-color: #72c2b9 #f6ebe2;
 }
 
 body {
   font-family: var(--font-body);
   overflow-x: hidden;
+  /* 
+    Custom cursor = the real brand mark. 
+    DOUBLED SIZE: We added "104 40" before the URLs to force the browser to 
+    scale the 52x20 image to 104x40 pixels.
+    HOTSPOT: Changed from (1 1) to (2 2) because the image size doubled.
+    FALLBACK: Changed 'auto' to 'pointer' so the browser prioritizes our image.
+  */
+  cursor: url('/brand/cursr.cur') 0 0, url('/brand/cursor.png') 0 0, pointer;
 }
 
 h1, h2, h3, h4, .display {
   font-family: var(--font-display);
+}
+
+h5 {
+  font-family: var(--font-body);
 }
 
 ::selection {
@@ -58,9 +108,58 @@ button:focus-visible {
   background-size: 420px auto;
 }
 
+/* 
+  Animated Background Pattern
+  ----------------------------------
+  Slides the pattern to the left smoothly using pure CSS.
+  30s = the speed (lower is faster, higher is slower).
+*/
+.bg-pattern-animated {
+  background-color: #003135;
+  background-image: url('/brand/Arrow-pattern.png');
+  background-repeat: repeat;
+  background-size: 420px auto;
+  animation: slide-left 30s linear infinite;
+}
+
+@keyframes slide-left {
+  from { background-position: 0 0; }
+  to { background-position: -420px 0; } /* Must match the background-size width */
+}
+
+/* Outlined "love" in the hero headline. -webkit-text-stroke only renders in
+   Chrome/Safari/Edge — Firefox and any browser without support was left with
+   transparent, invisible text. Fall back to a solid cream fill whenever the
+   stroke isn't supported, so the word is always visible somewhere. */
 .text-outline {
-  -webkit-text-stroke: 1.5px currentColor;
+  -webkit-text-stroke: 1.5px #f6ebe2;
   color: transparent;
+}
+
+@supports not (-webkit-text-stroke: 1px #f6ebe2) {
+  .text-outline {
+    color: #f6ebe2;
+  }
+}
+
+/* 
+  Custom Cursor Glow State
+  ----------------------------------
+  Instead of reverting to the system pointer, we swap to a secondary cursor 
+  image (cursor-glow.png) that has a white outline/glow baked into the art.
+  Make sure to add a 'cursor-glow.png' (or .cur) to your public/brand folder.
+  DOUBLED SIZE: Added "104 40" and changed hotspot to "2 2" to match the body cursor.
+  FALLBACK: Changed to 'pointer'.
+*/
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+label[for],
+select,
+summary {
+  cursor: url('/brand/cursor-glow.png') 0 1, pointer;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -71,5 +170,10 @@ button:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  /* Respect reduced motion preferences for the background animation */
+  .bg-pattern-animated {
+    animation: none;
   }
 }

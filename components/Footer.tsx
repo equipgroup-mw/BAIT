@@ -36,8 +36,8 @@ export default function Footer() {
             <div>
               <p className="font-display text-xs font-bold uppercase tracking-widest text-aqua">Follow</p>
               <ul className="mt-3 space-y-2 text-sm text-cream/85">
-                <li><a href="#" className="hover:text-coral">Instagram</a></li>
-                <li><a href="#" className="hover:text-coral">LinkedIn</a></li>
+                <li><a href="https://www.instagram.com/only_clickbait" className="hover:text-coral">Instagram</a></li>
+                <li><a href="https://www.linkedin.com/company/only-clickbait/" className="hover:text-coral">LinkedIn</a></li>
                 <li><a href="tel:+265885303239" className="hover:text-coral">+265 885 303 239</a></li>
               </ul>
             </div>

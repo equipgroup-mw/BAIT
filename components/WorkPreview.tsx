@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { projects } from '@/lib/data';
-import ProjectCard from './ProjectCard';
+import Tile from './Tile';
 import Sticker from './Sticker';
 
 export default function WorkPreview() {
+  const previewProjects = projects.slice(0, 4);
+
   return (
     <section className="bg-cream py-28 md:py-36">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
@@ -15,6 +17,9 @@ export default function WorkPreview() {
               <br />
               already told.
             </h2>
+            <p className="mt-4 max-w-md text-lg text-turquoise/70">
+              50+ projects and counting. Here&rsquo;s a highlight of our favorites.
+            </p>
           </div>
           <Link
             href="/work"
@@ -25,15 +30,10 @@ export default function WorkPreview() {
         </div>
 
         <div className="mt-16 grid gap-6 md:grid-cols-2 md:gap-8">
-          {projects.map((p, i) => (
-            <ProjectCard
+          {previewProjects.map((p, i) => (
+            <Tile
               key={p.slug}
-              title={p.title}
-              category={p.category}
-              year={p.year}
-              image={p.image}
-              slug={p.slug}
-              index={i}
+              project={p}
             />
           ))}
         </div>

@@ -2,23 +2,22 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import ArrowIcon from './ArrowIcon';
 import Sticker from './Sticker';
+
+// Three.js/WebGL can only run in the browser, never during Next.js's server render.
+const HeroArrowScene = dynamic(() => import('./HeroArrowScene'), { ssr: false });
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
 
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const imgY = useTransform(scrollYProgress, [0, 1], [0, -120]); // Changed to negative to move up on scroll
-  const imgRotate = useTransform(scrollYProgress, [0, 1], [0, 6]);
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -90]);
 
   return (
-    <section ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden bg-pattern-dark pt-24">
+    <section ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden bg-pattern-animated pt-24">
       {/* floating decorative arrows */}
       <ArrowIcon
         className="absolute left-[8%] top-[22%] h-8 w-8 animate-float opacity-70 md:h-12 md:w-12"
@@ -31,64 +30,43 @@ export default function Hero() {
         variant="light-turq"
       />
 
-      <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-center md:px-10">
-        <motion.div style={{ y: textY }}>
+      {/* Added relative to the grid container so the absolute arrow stays bound to this area */}
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-4 px-6 md:grid-cols-2 md:items-center md:gap-10 md:px-10">
+        
+        {/* Only the text/copy fades and drifts on scroll */}
+        <motion.div style={{ opacity: fade, y: textY }} className="md:self-start">
           <Sticker color="green" rotate={-3}>Marketing &amp; Media Studio</Sticker>
-          <h1 className="mt-6 font-display text-6xl font-bold uppercase leading-[0.92] text-cream sm:text-7xl lg:text-8xl">
-            We turn
-            <br />
-            brand stories
-            <br />
-            into{' '}
+          
+          {/* 
+            1. Base h5 uses 'font-body' (Manrope) 
+            2. Inner spans switch to 'font-display' (Metropolitano Extrabold) 
+          */}
+          <h5 className="mt-6 font-body text-5xl font-bold lowercase leading-[0.92] text-cream sm:text-7xl lg:text-8xl">
+            <span className="font-body">
+              We turn
+              <br />
+              brand stories
+              <br />
+              into{' '}
+            </span>
             <span className="relative inline-block">
-              <span className="text-outline">love</span>
+              <span className="inline-block -rotate-2 bg-aqua px-4 font-display font-bold uppercase text-turquoise">love</span>
             </span>
             <br />
-            <span className="inline-block -rotate-2 bg-green px-4 text-turquoise">stories.</span>
-          </h1>
-          <p className="mt-8 max-w-md text-lg text-cream/80">
-            Bold, authentic marketing that connects, performs, and pushes boundaries —
-            for brands ready to show up and steal hearts.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center gap-5">
-            <Link
-              href="/work"
-              className="rounded-full bg-coral px-8 py-4 font-display text-sm font-bold uppercase tracking-wide text-turquoise transition hover:scale-105 hover:bg-white"
-            >
-              See our work
-            </Link>
-            <Link
-              href="/#contact"
-              className="font-display text-sm font-bold uppercase tracking-wide text-cream underline decoration-aqua decoration-2 underline-offset-8 transition hover:text-coral"
-            >
-              Start a project
-            </Link>
-          </div>
+            <span className="inline-block -rotate-2 bg-green px-4 font-display font-bold uppercase text-turquoise">stories.</span>
+          </h5>
         </motion.div>
 
-        {/* Hero-arrow.png shown on its own — no code-drawn shape or overlay around it */}
-        <motion.div
-          style={{ scale: imgScale, y: imgY, rotate: imgRotate }}
-          className="relative mx-auto -mt-24 aspect-square w-full max-w-4xl md:-mt-48" // Adjusted margins to pull image up
-        >
-          <Image
-            src="/brand/Hero-arrow.png"
-            alt="Clickbait"
-            fill
-            className="object-contain drop-shadow-2xl"
-            priority
-            sizes="(max-width: 768px) 90vw, 40vw"
-          />
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        style={{ opacity: fade }}
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-center text-xs font-bold uppercase tracking-widest text-cream/60"
-      >
-        Scroll
-        <div className="mx-auto mt-2 h-8 w-px bg-cream/40" />
-      </motion.div>
+        {/* 
+          3D-arrow.glb 
+          Mobile: Sized using `svh` (Small Viewport Height) so it scales up on longer phones,
+          but shrinks on shorter phones so it ALWAYS fits on screen with the text.
+          Desktop: Unchanged, absolute centered overlay.
+        */}
+        <div className="relative mx-auto mt-4 aspect-square h-[35svh] w-[35svh] max-h-[420px] max-w-[420px] md:absolute md:top-[45%] md:left-[50%] md:z-[-1] md:mx-0 md:mt-0 md:h-screen md:w-[80vh] md:max-w-none md:max-h-none md:-translate-y-1/2">
+          <HeroArrowScene scrollProgress={scrollYProgress} />
+        </div>
+      </div>
     </section>
   );
 }
