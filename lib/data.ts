@@ -85,8 +85,8 @@ export const projects: Project[] = [
     category: 'Brand Campaign & Social',
     year: '2025',
     slug: 'elim-group',
-    image: '/work/thumbs/project-1.jpg',
-    thumbnail: '/work/thumbs/project-1.jpg',
+    image: '/work/thumbs/project-1.webp',
+    thumbnail: '/work/thumbs/project-1.webp',
     videoUrl: '/work/videos/elim-farms.webm/', // Added video path
     summary: 'A full rebrand of Elim Group’s social presence, pairing bold photography with a content system built for daily posting.',
     url: 'https://github.com/your-org/elim-group',
@@ -113,8 +113,8 @@ export const projects: Project[] = [
     category: 'Marketing Strategy',
     year: '2024',
     slug: 'zantchito',
-    image: '/work/thumbs/project-3.jpg',
-    thumbnail: '/work/thumbs/project-3.jpg',
+    image: '/work/thumbs/project-3.webp',
+    thumbnail: '/work/thumbs/project-3.webp',
     videoUrl: '/work/videos/zantchito.webm', // Added video path
     summary: 'Positioning and launch strategy for an entrepreneurship programme, built to recruit its first cohort on a tight runway.',
     url: 'https://github.com/your-org/zantchito',
@@ -127,8 +127,8 @@ export const projects: Project[] = [
     category: 'Photo & Video',
     year: '2024',
     slug: 'mafeco',
-    image: '/work/thumbs/project-4.jpg',
-    thumbnail: '/work/thumbs/project-4.jpg',
+    image: '/work/thumbs/project-4.webp',
+    thumbnail: '/work/thumbs/project-4.webp',
     videoUrl: '/work/videos/mafeco.webm', // Added video path
     summary: 'Documentary-style photo and video coverage across a nationwide cooperative network, cut into a single coherent story.',
     url: 'https://github.com/your-org/mafeco',
