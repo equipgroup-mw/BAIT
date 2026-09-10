@@ -1,0 +1,320 @@
+/* ============================================================
+   CLICKBAIT TILE GRID — CSS Module
+   Ported from Equip Dashboard Portfolio tile styles
+   Adapted for Clickbait brand colours & Arrow-icon placeholders
+   Variables defined in app/globals.css :root
+   ============================================================ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 300px;
+  grid-auto-flow: dense;
+  gap: var(--gap);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 260px;
+  }
+  /* On mobile, all tiles are normal size */
+  .size-wide,
+  .size-tall,
+  .size-large {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+.size-wide { grid-column: span 2; }
+.size-tall { grid-row: span 2; }
+.size-large { grid-column: span 2; grid-row: span 2; }
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  background: var(--turquoise-dark);
+  cursor: pointer;
+  display: block;
+  isolation: isolate;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Replaces old .tileMedia to act as a stacking context wrapper */
+.tileMediaWrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Image & Placeholder layers */
+.tileImage,
+.tileMediaWrapper .placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 1s var(--ease);
+}
+
+/* Video specific defaults */
+.tileVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  z-index: 1; /* Sits above the image */
+  transition: opacity 0.4s var(--ease);
+  pointer-events: none; /* Lets clicks pass straight through to the <a> tag */
+}
+
+.videoVisible {
+  opacity: 1;
+}
+
+.placeholder {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Arrow-icon placeholders - using the two PNGs */
+.placeholderTurquoise {
+  background-image: url('/brand/Arrow-icon-darkTurq.png');
+}
+
+.placeholderCoral {
+  background-image: url('/brand/Arrow-icon-lightTurq.png');
+}
+
+.placeholderGreen {
+  background-image: url('/brand/Arrow-icon-darkTurq.png');
+}
+
+.placeholderSand {
+  background-image: url('/brand/Arrow-icon-lightTurq.png');
+}
+
+/* Hover zoom on media */
+.tile:hover .tileImage,
+.tile:hover .tileMediaWrapper .placeholder {
+  transform: scale(1.07);
+}
+
+/* Gold foil sweep - signature interaction */
+.tileSheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(203, 184, 140, 0.55) 46%,
+    rgba(255, 240, 210, 0.75) 50%,
+    rgba(203, 184, 140, 0.55) 54%,
+    transparent 70%
+  );
+  transform: translateX(-140%);
+  opacity: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.tile:hover .tileSheen {
+  animation: sheenSweep 1.1s var(--ease) forwards;
+}
+
+@keyframes sheenSweep {
+  0% { transform: translateX(-140%); opacity: 0; }
+  12% { opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: translateX(140%); opacity: 0; }
+}
+
+.tileOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4; /* Overlay sits above the video so text is always readable */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  background: linear-gradient(
+    0deg,
+    rgba(7, 21, 35, 0.94) 0%,
+    rgba(7, 21, 35, 0.55) 42%,
+    rgba(7, 21, 35, 0) 72%
+  );
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+
+/* On mobile/touch, keep overlay visible */
+@media (max-width: 768px) {
+  .tileOverlay {
+    opacity: 1;
+    transform: none;
+    background: linear-gradient(
+      0deg,
+      rgba(7, 21, 35, 0.92) 0%,
+      rgba(7, 21, 35, 0.15) 55%,
+      rgba(7, 21, 35, 0) 75%
+    );
+  }
+}
+
+.tile:hover .tileOverlay,
+.tile:focus-visible .tileOverlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tileRule {
+  width: 0;
+  height: 1px;
+  background: var(--sand);
+  margin-bottom: 14px;
+  transition: width .5s var(--ease) .08s;
+}
+
+.tile:hover .tileRule {
+  width: 40px;
+}
+
+@media (max-width: 768px) {
+  .tileRule {
+    width: 32px;
+  }
+}
+
+.tileTitle {
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  color: var(--cream);
+  line-height: 1.28;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.tileMeta {
+  margin-top: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sand);
+  font-weight: 500;
+}
+
+.tileBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: rgba(0, 25, 28, 0.55);
+  border: 1px solid rgba(217, 181, 145, 0.4);
+  padding: 6px 10px;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+
+.tile:hover .tileBadge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .tileBadge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .tile:hover .tileBadge {
+    transform: translateY(0);
+  }
+}
+
+.tileArrow {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(246, 235, 226, 0.5);
+  color: var(--cream);
+  opacity: 0;
+  transform: translate(-6px, 6px) rotate(-8deg);
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+
+.tile:hover .tileArrow {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0);
+}
+
+.tile:hover .tileBadge {
+  transform: translateY(48px);
+}
+
+@media (max-width: 768px) {
+  .tileArrow {
+    opacity: 1;
+    transform: none;
+  }
+  .tile:hover .tileBadge {
+    transform: translateY(0);
+  }
+}
+
+.tileArrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Scroll reveal */
+.tile {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+
+.tile.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tile,
+  .tileImage,
+  .tileMediaWrapper .placeholder,
+  .tileVideo,
+  .tileSheen,
+  .tileOverlay,
+  .tileRule,
+  .tileBadge,
+  .tileArrow {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .tile:hover .tileImage,
+  .tile:hover .tileMediaWrapper .placeholder {
+    transform: scale(1);
+  }
+}
